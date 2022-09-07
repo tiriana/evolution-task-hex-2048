@@ -6,6 +6,7 @@ Your task is to develop a game [2048](https://play2048.co/) on a hexagonal field
 Please take a look at our example: [hexagonal 2048](https://hex2048.surge.sh/).
 
 What is required:
+
 - Have to render a hexagonal game field with hexagons according to the game size.
 - Required game size is 2. The existence of other game levels (3, 4, and more) is highly appreciated but NOT REQUIRED.
 - Have to receive data from the [server](#receiving-data-from-the-deployed-server) and render them correctly.
@@ -17,9 +18,11 @@ What is required:
 - All other ideas, game features and controls, supported devices, and so on are optional.
 
 Nice to have:
+
 - Several game levels (at least 3 and 4) ([example](https://hex2048.surge.sh/?hostname=hex2048-lambda.octa.wtf&port=80&radius=4)).
 
 More info:
+
 - **Useful article about hexagons:
   [Hexagonal Grids](https://www.redblobgames.com/grids/hexagons/).**
 - The visual game appearance and technologies to implement the task are up to you and are restricted only to your imagination.
@@ -29,15 +32,15 @@ More info:
 
 ### Game initialization
 
-When the game starts on any game level, the user should not interact with UI. 
+When the game starts on any game level, the user should not interact with UI.
 That means when you choose the game level or the game is loaded, the game should be initialized on its own by default,
 and the user has to see the beginning numbers to start playing.
 
-The same rule is applicable when the game is loaded by the URL for [tests purposes](#how-will-your-solution-be-tested). 
-When the game is loaded using URL parameters, then the first request has to be done immediately after loading without any additional actions. 
+The same rule is applicable when the game is loaded by the URL for [tests purposes](#how-will-your-solution-be-tested).
+When the game is loaded using URL parameters, then the first request has to be done immediately after loading without any additional actions.
 And as a result, you will be able to see the beginning numbers to start playing.
 
-In other words, before starting playing the user should already see some beginning numbers received from the server without any actions. 
+In other words, before starting playing the user should already see some beginning numbers received from the server without any actions.
 The first request to the server has to be done automatically after starting the game.
 
 ### Directions and Keys
@@ -73,8 +76,8 @@ appropriate hexagonal direction.
 
 After each shift, you need to place new numbers received from the [server](#rng-server).
 
-In case if after starting shifting there are no movements done in the chosen direction and there are possible movements at least in one direction ([game status](#game-status) is `playing`). 
-Nothing should be done until shifting is completed - do not need to add new numbers. 
+In case if after starting shifting there are no movements done in the chosen direction and there are possible movements at least in one direction ([game status](#game-status) is `playing`).
+Nothing should be done until shifting is completed - do not need to add new numbers.
 The game has to wait for changes in any direction if they are possible and has not been done during shifting.
 
 ### Game status
@@ -82,12 +85,14 @@ The game has to wait for changes in any direction if they are possible and has n
 The user should know the current game status.
 
 Possible game statuses:
+
 - `playing` - there are possible moves that can be done.
 - `game-over` - there are no more possible moves.
 
-Game status should be present somewhere in your game DOM element (any one DOM element at the any place of DOM) as a data attribute `data-status`. 
+Game status should be present somewhere in your game DOM element (any one DOM element at the any place of DOM) as a data attribute `data-status`.
 
 Example:
+
 ```html
 <div>Game Status: <span data-status="playing">playing</span></div>
 ```
@@ -105,6 +110,7 @@ more) of your field. Cells’ order doesn't matter. A cell is an object which is
 representation of [cube coordinates](https://www.redblobgames.com/grids/hexagons/#coordinates-cube).
 
 For example:
+
 ```js
 const cell = {
   x: 0,
@@ -123,12 +129,13 @@ The servers send an empty array in case of no more positions to add new numbers.
 ![cube coordinates system](./assets/cube-coordinates.svg)
 
 The server expects you to send the radius (game level) in the URL pathname
-(e.g., `/2` for 2, `/3` for 3, etc.). 
+(e.g., `/2` for 2, `/3` for 3, etc.).
 For example, correct server URL for game radius 2 is `//hex2048-lambda.octa.wtf/2`.
 
 Server URL: `hex2048-lambda.octa.wtf` (works with both HTTP and HTTPS).
 
 Example (initial game):
+
 ```bash
 curl -d '[]' \
      -X POST hex2048-lambda.octa.wtf/2
@@ -142,6 +149,7 @@ curl -d '[]' \
 ```
 
 Server response:
+
 ```
 [
   { "x": 0, "y": 1, "z": -1, "value": 2},
@@ -151,6 +159,7 @@ Server response:
 ```
 
 Example with payload (filled cells):
+
 ```bash
 curl -d '[{"x": 0, "y": 0, "z": 0, "value": 2}]' \
      -X POST http://hex2048-lambda.octa.wtf/2
@@ -164,15 +173,17 @@ curl -d '[{"x": 0, "y": 0, "z": 0, "value": 2}]' \
 ```
 
 Server response:
+
 ```
 [ { "x": 1, "y": -1, "z": 0, "value": 2 } ]
 ```
 
 ### Receiving data from the local server
 
-To start the server locally you should install dependencies and run a test server. 
+To start the server locally you should install dependencies and run a test server.
 
 Steps to help:
+
 ```
 npm install
 npm run rng-server
@@ -181,12 +192,14 @@ npm run rng-server
 Server URL: `http://localhost:13337`.
 
 Example:
+
 ```bash
 curl -d '[{"x": 0, "y": 0, "z": 0, "value": 2}]' \
      -X POST http://localhost:13337/2
 ```
 
 Server response:
+
 ```
 [ { "x": 1, "y": -1, "z": 0, "value": 2 } ]
 ```
@@ -213,6 +226,7 @@ respective representations of cube coordinates `x`, `y`, `z`. And `data-value`
 is number into this cell (e.g., 2, 4, 8, etc., or 0 if there is no number yet).
 
 Example:
+
 ```html
 <div data-x="1" data-y="-1" data-z="0" data-value="8">8</div>
 <div data-x="1" data-y="-1" data-z="0" data-value="0"></div>
@@ -230,6 +244,7 @@ Do not forget to add `data-status` attribute. [Read more](#game-status)
 ### Run tests locally
 
 To run tests locally you should run tests. Steps to help:
+
 ```
 npm install
 npm run test:local
@@ -237,11 +252,13 @@ npm run test:local
 
 By default, the server connects to `http://localhost:8080` in order to open the
 game but you can change this behavior by passing `url` parameter. Example:
+
 ```
 npm run test:local -- --url=http://localhost:3000
 ```
 
 Please run tests for your deployed game and check that all work properly.
+
 ```
 npm run test:local -- --url=http://hex2048.surge.sh
 ```
@@ -256,40 +273,39 @@ For extra credits, you should the following (one or more):
 
 ## Implementation details
 
-You can use TypeScript or JavaScript this decision is up to you. 
+You can use TypeScript or JavaScript this decision is up to you.
 If you want to use JavaScript, you should use `.jsx` extension, and `.tsx` extension for TypeScript.
 
 If you don't like React, you can remove `ReactDOM.render` from `src/index.tsx` and implement your game with plain JavaScript/TypeScript.
 
-We use `Create-React-App` template which brings a number of limitations in the choice of other technologies, 
+We use `Create-React-App` template which brings a number of limitations in the choice of other technologies,
 but if you want and are able to use another library, we won't mind.
 
 ## Package scripts description
 
-* `npm run start` - starts dev server with your game. The page will be reloaded on each code update.
-* `npm run build` - builds the production version of your game. This command is used for tests.
-* `npm run start-server` - starts rng-server locally.
-* `npm run test:unit` - starts unit tests from `/src` folder. You can use it for your own tests.
-* `npm run test:local` - starts our tests for your game. This command expects that dev-server with the game is launched and local rng-server not. These tests use [puppeteer](https://github.com/puppeteer/puppeteer) for tests your game in a browser. You are able to see how tests run in the browser for your game with this command.
-* `npm run test` - starts production tests. This command use port 3000, so please leave it free if you try to use this command.
+- `npm run start` - starts dev server with your game. The page will be reloaded on each code update.
+- `npm run build` - builds the production version of your game. This command is used for tests.
+- `npm run start-server` - starts rng-server locally.
+- `npm run test:unit` - starts unit tests from `/src` folder. You can use it for your own tests.
+- `npm run test:local` - starts our tests for your game. This command expects that dev-server with the game is launched and local rng-server not. These tests use [puppeteer](https://github.com/puppeteer/puppeteer) for tests your game in a browser. You are able to see how tests run in the browser for your game with this command.
+- `npm run test` - starts production tests. This command use port 3000, so please leave it free if you try to use this command.
 
 ## Tests requirements
 
-The [tests/\*](tests/) files should not be modified. 
+The [tests/\*](tests/) files should not be modified.
 If you would like to add your own unit tests, you can add these in a separate file in the `src` folder.
 
-The `package.json` file should only be modified in order to add any third-party dependencies required for your solution. 
+The `package.json` file should only be modified in order to add any third-party dependencies required for your solution.
 The jest and babel versions should not be changed.
 
 Your solution must use/be compatible with Node.js version **15.5.1**.
 
 ## Tests
 
-Run `npm install` to install all dependencies and then run npm run test to run the unit tests. 
+Run `npm install` to install all dependencies and then run npm run test to run the unit tests.
 These should all pass if your solution has been implemented correctly.
 
 Good luck!
-
 
 ## License
 

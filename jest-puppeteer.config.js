@@ -4,4 +4,4 @@ module.exports = {
   },
   browsers: "chromium",
   browserContext: "default",
-}
+};
