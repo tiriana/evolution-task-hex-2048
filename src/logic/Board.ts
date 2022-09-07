@@ -12,14 +12,14 @@ interface IList<T> {
   [index: number]: T;
 }
 
-class Direction extends Vector3<-1 | 0 | 1> {}
-
-const UP = new Direction(0, 1, -1);
-const DOWN = new Direction(0, -1, 1);
-const LEFT_UP = new Direction(-1, 1, 0);
-const RIGHT_DOWN = new Direction(1, -1, 0);
-const RIGHT_UP = new Direction(1, 0, -1);
-const LEFT_DOWN = new Direction(-1, 0, 1);
+class Direction extends Vector3<-1 | 0 | 1> {
+  static readonly UP = new Direction(0, 1, -1);
+  static readonly DOWN = new Direction(0, -1, 1);
+  static readonly LEFT_UP = new Direction(-1, 1, 0);
+  static readonly RIGHT_DOWN = new Direction(1, -1, 0);
+  static readonly RIGHT_UP = new Direction(1, 0, -1);
+  static readonly LEFT_DOWN = new Direction(-1, 0, 1);
+}
 
 class Board {
   radius: number = 0;
