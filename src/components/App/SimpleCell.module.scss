@@ -1,0 +1,73 @@
+.cell {
+  // fill: aqua;
+  stroke: grey;
+  // fill-opacity: 1;
+}
+
+.text {
+  fill: grey;
+  stroke: none;
+  font-size: 12px;
+}
+
+.tile0 {
+  stroke: #dcb;
+}
+
+.tile2 {
+  stroke: #eee;
+}
+
+.tile4 {
+  stroke: #eec;
+}
+
+.tile8 {
+  color: #ffe;
+  stroke: #fb8;
+}
+
+.tile16 {
+  color: #ffe;
+  stroke: #f96;
+}
+
+.tile32 {
+  color: #ffe;
+  stroke: #f75;
+}
+
+.tile64 {
+  color: #ffe;
+  stroke: #f53;
+}
+
+.tile128 {
+  color: #ffe;
+  stroke: #ec7;
+  font-size: 8px;
+}
+
+.tile256 {
+  color: #ffe;
+  stroke: #ec6;
+  font-size: 10px;
+}
+
+.tile512 {
+  color: #ffe;
+  stroke: #ec5;
+  font-size: 9px;
+}
+
+.tile1024 {
+  color: #fff;
+  stroke: #ec3;
+  font-size: 8px;
+}
+
+.tile2048 {
+  color: #fff;
+  stroke: #ec2;
+  font-size: 7px;
+}
