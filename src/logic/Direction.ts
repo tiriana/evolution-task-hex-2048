@@ -3,15 +3,12 @@ import Vector3 from "./Vector3";
 type Directional = -1 | 0 | 1;
 
 export default class Direction extends Vector3<Directional> {
-  /**
-   * @returns next direction in clockwise order
-   */
-  nextCW(): Direction {
+  next(): Direction {
     return Direction.NEXT_CW.get(this) as Direction;
   }
 
-  next(): Direction {
-    return this.nextCW();
+  prev(): Direction {
+    return Direction.NEXT_CCW.get(this) as Direction;
   }
 
   private constructor(x: Directional, y: Directional, z: Directional) {
@@ -33,6 +30,7 @@ export default class Direction extends Vector3<Directional> {
     Direction.LEFT_UP,
   ];
 
+  /** cloclwise */
   private static readonly NEXT_CW: Map<Direction, Direction> = new Map([
     [Direction.UP, Direction.RIGHT_UP],
     [Direction.RIGHT_UP, Direction.RIGHT_DOWN],
@@ -40,5 +38,15 @@ export default class Direction extends Vector3<Directional> {
     [Direction.DOWN, Direction.LEFT_DOWN],
     [Direction.LEFT_DOWN, Direction.LEFT_UP],
     [Direction.LEFT_UP, Direction.UP],
+  ]);
+
+  /** counter cloclwise */
+  private static readonly NEXT_CCW: Map<Direction, Direction> = new Map([
+    [Direction.RIGHT_UP, Direction.UP],
+    [Direction.RIGHT_DOWN, Direction.RIGHT_UP],
+    [Direction.DOWN, Direction.RIGHT_DOWN],
+    [Direction.LEFT_DOWN, Direction.DOWN],
+    [Direction.LEFT_UP, Direction.LEFT_DOWN],
+    [Direction.UP, Direction.LEFT_UP],
   ]);
 }

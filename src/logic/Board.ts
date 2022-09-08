@@ -14,7 +14,7 @@ import { range } from "./utils";
 // \y_z/
 
 class Edge extends CellsLine {}
-class Diagonal extends CellsLine {}
+class Chord extends CellsLine {}
 
 export default class Board {
   radius: number;
@@ -22,7 +22,7 @@ export default class Board {
   cells: Cell[];
   cube: Map<number, Map<number, Map<number, Cell>>> = new Map();
 
-  diagonals: Map<Direction, Diagonal> = new Map<Direction, Diagonal>();
+  diagonals: Map<Direction, Chord[]> = new Map<Direction, Chord[]>();
   edges: Map<Direction, Edge> = new Map<Direction, Edge>();
 
   private howManyCells: number;
@@ -45,7 +45,7 @@ export default class Board {
 
   getEdge(direction: Direction): Edge {
     if (!this.edges.has(direction)) {
-      const nextDirection: Direction = direction.nextCW();
+      const nextDirection: Direction = direction.next();
       const vertex1: Cell = this.getCell(
         direction.x * this.radius,
         direction.y * this.radius,
@@ -61,6 +61,38 @@ export default class Board {
       this.edges.set(direction, new Edge(this, vertex1, vertex2));
     }
     return this.edges.get(direction) as Edge;
+  }
+
+  /**
+   * Retunrs all chords (or lanes) in direction.
+   * For exempls - for UP it returns all 'vertical' chords, ordered from bottom to up.
+   * @param direction
+   * @returns
+   */
+  getChords(direction: Direction): Chord[] {
+    if (!this.diagonals.has(direction)) {
+      const finalCells: Cell[] = [
+        ...this.getEdge(direction.prev()).cells,
+        ...this.getEdge(direction).cells.slice(1), // first cell is the same as prev edge's last cell, so it's duplicated, so I remove it
+      ];
+
+      const startingCells: Cell[] = [
+        ...this.getEdge(direction.next().next()).cells,
+        ...this.getEdge(direction.next().next().next()).cells.slice(1),
+      ];
+
+      const diagonals: Chord[] = new Array(finalCells.length);
+
+      for (let i = 0; i < diagonals.length; i++) {
+        const start = startingCells[i];
+        const end = finalCells[finalCells.length - 1 - i];
+
+        diagonals[i] = new Chord(this, start, end);
+      }
+
+      this.diagonals.set(direction, diagonals);
+    }
+    return this.diagonals.get(direction) as Chord[];
   }
 
   private buildCells(): void {

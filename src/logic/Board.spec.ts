@@ -31,4 +31,80 @@ describe("game board", () => {
       }
     );
   });
+
+  describe("getChords", () => {
+    let board: Board;
+
+    beforeAll(() => {
+      board = new Board(1);
+      board.cells.forEach(
+        (cell: Cell) => (cell.value = 100 * cell.x + 10 * cell.y + cell.z)
+      );
+    });
+
+    test.each([
+      [
+        "UP",
+        Direction.UP,
+        [
+          [90, 99],
+          [-9, 0, 9],
+          [-99, -90],
+        ],
+      ],
+      [
+        "RIGHT_UP",
+        Direction.RIGHT_UP,
+        [
+          [-9, 90],
+          [-99, 0, 99],
+          [-90, 9],
+        ],
+      ],
+      [
+        "RIGHT_DOWN",
+        Direction.RIGHT_DOWN,
+        [
+          [-99, -9],
+          [-90, 0, 90],
+          [9, 99],
+        ],
+      ],
+      [
+        "DOWN",
+        Direction.DOWN,
+        [
+          [-90, -99],
+          [9, 0, -9],
+          [99, 90],
+        ],
+      ],
+      [
+        "LEFT_DOWN",
+        Direction.LEFT_DOWN,
+        [
+          [9, -90],
+          [99, 0, -99],
+          [90, -9],
+        ],
+      ],
+      [
+        "LEFT_UP",
+        Direction.LEFT_UP,
+        [
+          [99, 9],
+          [90, 0, -90],
+          [-9, -99],
+        ],
+      ],
+    ])(
+      "Should return correct edge for direction %s",
+      (_, direction: Direction, expected: number[][]) => {
+        const chords = board.getChords(direction);
+        const actual = chords.map((chord) => chord.values());
+
+        expect(actual).toEqual(expected);
+      }
+    );
+  });
 });
