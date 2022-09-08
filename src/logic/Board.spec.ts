@@ -3,10 +3,6 @@ import Cell from "./Cell";
 import Direction from "./Direction";
 
 describe("game board", () => {
-  //   test("should have cells", () => {
-  //     console.log(new Board(2).cube);
-  //   });
-
   describe("getEdge", () => {
     let board: Board;
 

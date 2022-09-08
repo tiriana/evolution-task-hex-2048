@@ -1,9 +1,7 @@
 import Direction from "./Direction";
 import Cell from "./Cell";
-import { BoardLane } from "./BoardLane";
 import { OutOfTheBoard } from "./OutOfTheBoard";
 import CellsLine from "./CellsLine";
-import { range } from "./utils";
 
 // coordinates
 // x (q) - top - bottom
