@@ -1,5 +1,6 @@
 import Direction from "./Direction";
-import Vector3 from "./Vector3";
+import { Cell } from "./Cell";
+import { BoardLane } from "./BoardLane";
 
 // coordinates
 // x (q) - top - bottom
@@ -9,80 +10,13 @@ import Vector3 from "./Vector3";
 // / x \
 // \y_z/
 
-class CellPosition extends Vector3<number> {}
-
-class Cell {
-  position: CellPosition;
-  value: number = 0;
-
-  constructor(x: number, y: number, z: number) {
-    this.position = new CellPosition(x, y, z);
-  }
-
-  get isEmpty(): boolean {
-    return this.value === 0;
-  }
-
-  get x(): number {
-    return this.position.x;
-  }
-  get y(): number {
-    return this.position.y;
-  }
-  get z(): number {
-    return this.position.z;
-  }
-}
-
-class BoardLane implements Iterable<Cell> {
-  readonly board: Board;
-  readonly direction: Direction;
-  readonly handle: Cell;
-  private iterator: Iterator<Cell> = new BoardLaneIterator(this);
-
-  constructor(board: Board, direction: Direction, handle: Cell) {
-    this.board = board;
-    this.direction = direction;
-    this.handle = handle;
-  }
-
-  [Symbol.iterator](): Iterator<Cell> {
-    return this.iterator;
-  }
-}
-
-class BoardLaneIterator implements Iterator<Cell | undefined> {
-  private n: number = 0;
-  private lane: BoardLane;
-
-  constructor(boardLane: BoardLane) {
-    this.lane = boardLane;
-  }
-
-  next(): IteratorResult<Cell> {
-    const nextX: number = this.lane.handle.x + this.lane.direction.x * this.n;
-    const nextY: number = this.lane.handle.y + this.lane.direction.y * this.n;
-    const nextZ: number = this.lane.handle.z + this.lane.direction.z * this.n;
-
-    const isLast: boolean =
-      nextX === -this.lane.handle.x &&
-      nextY === -this.lane.handle.y &&
-      nextZ === -this.lane.handle.z;
-
-    const cell: Cell = this.lane.board.getCell(nextX, nextY, nextZ) as Cell;
-
-    return {
-      done: isLast,
-      value: cell,
-    };
-  }
-}
-
 export default class Board {
   radius: number;
   cells: Cell[];
   cube: Map<number, Map<number, Map<number, Cell>>> = new Map();
-  lanes: Map<Direction, Cell[]> = new Map<Direction, Cell[]>();
+  lanes: Map<Direction, BoardLane> = new Map<Direction, BoardLane>();
+
+  edges: Map<Direction, Cell[]> = new Map<Direction, Cell[]>();
 
   private howManyCells: number;
 
@@ -99,6 +33,8 @@ export default class Board {
   getCell(x: number, y: number, z: number): Cell | undefined {
     return this.cube.get(x)?.get(y)?.get(z);
   }
+
+  getEdge(direction: Direction): Cell[] {}
 
   private buildCells(): void {
     let cellsCount = 0;
