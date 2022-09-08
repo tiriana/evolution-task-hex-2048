@@ -1,8 +1,6 @@
 import React from "react";
 import { Cell } from "../../logic/GameLogic";
 
-import { Hexagon, Text, Pattern, Path, Hex } from "react-hexgrid";
-
 import style from "./SimpleCell.module.scss";
 
 function cube_to_oddq(hex: Cell) {
@@ -19,6 +17,7 @@ type SimpleCellProps = {
 const SimpleCell: React.FC<SimpleCellProps> = ({ cell }: SimpleCellProps) => {
   return (
     <div
+      className={style.hexagon}
       style={{
         position: "absolute",
         left: 300 + cube_to_oddq(cell)[0] * 100 + "px",

@@ -1,73 +1,124 @@
-.cell {
-  // fill: aqua;
-  stroke: grey;
-  // fill-opacity: 1;
+.hexagon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  $hexagon-size: 50px;
+  $hexagon-color-1: #00ffb8;
+  $hexagon-color-2: #13ce9a;
+
+  width: ($hexagon-size * 0.645);
+  height: $hexagon-size;
+  background-color: red;
+  border-radius: ($hexagon-size / 10);
+
+  &:hover {
+    transform: rotate(30deg);
+  }
+
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: inherit;
+    height: inherit;
+    background-image: inherit;
+    background-color: inherit;
+    border-radius: inherit;
+    z-index: -1;
+  }
+
+  &:before {
+    transform: rotate(60deg);
+  }
+
+  &:after {
+    transform: rotate(-60deg);
+  }
 }
 
-.text {
-  fill: grey;
-  stroke: none;
-  font-size: 12px;
-}
+// Base Styling
 
-.tile0 {
-  stroke: #dcb;
-}
+// body {
+//   margin: 0;
+//   background-color: #272727;
+// }
 
-.tile2 {
-  stroke: #eee;
-}
+// .center {
+//   position: fixed;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// }
+// .text {
+//   fill: grey;
+//   stroke: none;
+//   font-size: 12px;
+// }
 
-.tile4 {
-  stroke: #eec;
-}
+// .tile0 {
+//   stroke: #dcb;
+// }
 
-.tile8 {
-  color: #ffe;
-  stroke: #fb8;
-}
+// .tile2 {
+//   stroke: #eee;
+// }
 
-.tile16 {
-  color: #ffe;
-  stroke: #f96;
-}
+// .tile4 {
+//   stroke: #eec;
+// }
 
-.tile32 {
-  color: #ffe;
-  stroke: #f75;
-}
+// .tile8 {
+//   color: #ffe;
+//   stroke: #fb8;
+// }
 
-.tile64 {
-  color: #ffe;
-  stroke: #f53;
-}
+// .tile16 {
+//   color: #ffe;
+//   stroke: #f96;
+// }
 
-.tile128 {
-  color: #ffe;
-  stroke: #ec7;
-  font-size: 8px;
-}
+// .tile32 {
+//   color: #ffe;
+//   stroke: #f75;
+// }
 
-.tile256 {
-  color: #ffe;
-  stroke: #ec6;
-  font-size: 10px;
-}
+// .tile64 {
+//   color: #ffe;
+//   stroke: #f53;
+// }
 
-.tile512 {
-  color: #ffe;
-  stroke: #ec5;
-  font-size: 9px;
-}
+// .tile128 {
+//   color: #ffe;
+//   stroke: #ec7;
+//   font-size: 8px;
+// }
 
-.tile1024 {
-  color: #fff;
-  stroke: #ec3;
-  font-size: 8px;
-}
+// .tile256 {
+//   color: #ffe;
+//   stroke: #ec6;
+//   font-size: 10px;
+// }
 
-.tile2048 {
-  color: #fff;
-  stroke: #ec2;
-  font-size: 7px;
-}
+// .tile512 {
+//   color: #ffe;
+//   stroke: #ec5;
+//   font-size: 9px;
+// }
+
+// .tile1024 {
+//   color: #fff;
+//   stroke: #ec3;
+//   font-size: 8px;
+// }
+
+// .tile2048 {
+//   color: #fff;
+//   stroke: #ec2;
+//   font-size: 7px;
+// }
