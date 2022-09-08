@@ -1,50 +1,47 @@
 import React from "react";
 import { default as BoardLogic } from "../../logic/Board";
 import Direction from "../../logic/Direction";
+import Cell from "../../logic/Cell";
 import SimpleBoard from "./SimpleBoard";
-import KeyboardEventHandler from "@infinium/react-keyboard-event-handler";
 
-import { useState, useEffect, useReducer } from "react";
+import { useState, useReducer } from "react";
+import { MoveListener } from "./MoveListener";
 
-type MoveListenerProps = {
-  onMove: (dir: Direction) => unknown;
+declare global {
+  interface Window {
+    bag: any;
+  }
+}
+type GameStateProps = {
+  hasMove: boolean;
 };
-const MoveListener: React.FC<MoveListenerProps> = ({ onMove }) => {
-  const directionsMap: { [key: string]: Direction } = {
-    d: Direction.LEFT_UP,
-    s: Direction.UP,
-    a: Direction.RIGHT_UP,
-    q: Direction.RIGHT_DOWN,
-    w: Direction.DOWN,
-    e: Direction.LEFT_DOWN,
-  };
-  return (
-    <KeyboardEventHandler
-      handleKeys={["q", "w", "e", "a", "s", "d"]}
-      onKeyEvent={(key, e) => onMove(directionsMap[key])}
-    />
-  );
+export const GameState: React.FC<GameStateProps> = ({ hasMove }) => {
+  return <div>{hasMove ? "playing" : "game-over"}</div>;
 };
 
 export const SimpleGame: React.FC = () => {
-  const [board, setBoard] = useState(new BoardLogic(2));
+  const [board, setBoard] = useState(new BoardLogic(2).fromValues([2, 2, 2]));
 
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
-  // set some cells for test
-  board.getCell(0, 0, 0).value = 2;
-  board.getCell(-2, 0, 2).value = 4;
-  board.getCell(1, 1, -2).value = 2;
+  window.bag = {
+    board,
+    Direction,
+  };
 
   const onMove = (dir: Direction) => {
     board.makeMove(dir);
+    const cell: Cell | undefined = board.getEmptyCells().pop();
+    if (cell) cell.value = Math.random() < 0.5 ? 2 : 4;
+
     setBoard(board);
-    forceUpdate();
+    forceUpdate(); // my bad...
   };
 
   return (
     <>
-      <MoveListener onMove={onMove} />
+      {board.hasMove() && <MoveListener onMove={onMove} />}
+      <GameState hasMove={board.hasMove()} />
       <SimpleBoard board={board} />
     </>
   );

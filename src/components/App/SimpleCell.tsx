@@ -33,7 +33,10 @@ const SimpleCell: React.FC<SimpleCellProps> = ({ cell }: SimpleCellProps) => {
       }}
     >
       {/* {[...cell.position].join(",")} */}
-      {cell.value}
+      {cell.value ? cell.value : ""}
+      {/* <span className={style.coord_X}>{cell.x}</span>
+      <span className={style.coord_Y}>{cell.y}</span>
+      <span className={style.coord_Z}>{cell.z}</span> */}
     </div>
     // <Hexagon
     //   key={cell.position.toString()}

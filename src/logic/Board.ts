@@ -36,6 +36,10 @@ export default class Board {
     this.buildCells();
   }
 
+  getEmptyCells(): Cell[] {
+    return this.cells.filter((cell: Cell) => cell.isEmpty());
+  }
+
   getCell(x: number, y: number, z: number): Cell {
     const cell: Cell | undefined = this.cube.get(x)?.get(y)?.get(z);
     if (!cell) throw new OutOfTheBoard(this, x, y, z);
@@ -53,7 +57,7 @@ export default class Board {
 
       // check if has a neighbour with the same value
       for (let j = 0; j < Direction.ALL_CLOCKWISE.length; j++) {
-        const neighbourDirection: Direction = Direction.ALL_CLOCKWISE[i];
+        const neighbourDirection: Direction = Direction.ALL_CLOCKWISE[j];
         const x: number = cell.x + neighbourDirection.x;
         const y: number = cell.y + neighbourDirection.y;
         const z: number = cell.z + neighbourDirection.z;
@@ -127,16 +131,16 @@ export default class Board {
         ...this.getEdge(direction.next().next().next()).cells.slice(1),
       ];
 
-      const diagonals: Chord[] = new Array(finalCells.length);
+      const chords: Chord[] = new Array(finalCells.length);
 
-      for (let i = 0; i < diagonals.length; i++) {
+      for (let i = 0; i < chords.length; i++) {
         const start = startingCells[i];
         const end = finalCells[finalCells.length - 1 - i];
 
-        diagonals[i] = new Chord(this, start, end);
+        chords[i] = new Chord(this, start, end);
       }
 
-      this.diagonals.set(direction, diagonals);
+      this.diagonals.set(direction, chords);
     }
     return this.diagonals.get(direction) as Chord[];
   }

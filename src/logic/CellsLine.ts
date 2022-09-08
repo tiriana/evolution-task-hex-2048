@@ -44,9 +44,19 @@ export default class CellsLine {
   }
 
   fromValues(newValues: number[] = []): this {
+    console.log(
+      "before",
+      newValues,
+      this.cells.map((c) => c.value)
+    );
     for (let i = 0; i < this.cells.length; i++) {
       this.cells[i].value = newValues[i];
     }
+    console.log(
+      "after",
+      newValues,
+      this.cells.map((c) => c.value)
+    );
     return this;
   }
 }
