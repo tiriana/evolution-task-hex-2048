@@ -28,7 +28,7 @@ const SimpleBoard: React.FC<SimpleBoardProps> = ({
         origin={{ x: 0, y: 0 }}
       >
         {board.cells.map((cell: Cell) => {
-          return <SimpleCell key={cell.position.toString()} cell={cell} />;
+          return <SimpleCell key={[...cell.position].join(",")} cell={cell} />;
         })}
       </Layout>
     </HexGrid>

@@ -15,6 +15,7 @@ const SimpleCell: React.FC<SimpleCellProps> = ({ cell }: SimpleCellProps) => {
     //   [{cell.x}, {cell.y}, {cell.z}]: {cell.value}
     // </div>
     <Hexagon
+      key={cell.position.toString()}
       className={[style.cell, style[`tile${cell.value}`]].join(" ")}
       data={cell.position}
       q={cell.x}
