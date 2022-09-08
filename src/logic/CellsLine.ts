@@ -42,4 +42,11 @@ export default class CellsLine {
   values(): number[] {
     return this.cells.map((cell: Cell) => cell.value);
   }
+
+  fromValues(newValues: number[] = []): this {
+    for (let i = 0; i < this.cells.length; i++) {
+      this.cells[i].value = newValues[i];
+    }
+    return this;
+  }
 }

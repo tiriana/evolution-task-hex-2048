@@ -7,66 +7,68 @@
   position: absolute;
   justify-content: center;
   align-items: center;
+
+  font-size: 50px;
 }
 
 .cell--0 {
-  background-color: #dcb;
+  color: #dcb;
 }
 
 .cell--2 {
-  background-color: #eee;
+  color: #eee;
 }
 
 .cell--4 {
-  background-color: #eec;
+  color: #eec;
 }
 
 .cell--8 {
   color: #ffe;
-  background-color: #fb8;
+  color: #fb8;
 }
 
 .cell--16 {
   color: #ffe;
-  background-color: #f96;
+  color: #f96;
 }
 
 .cell--32 {
   color: #ffe;
-  background-color: #f75;
+  color: #f75;
 }
 
 .cell--64 {
   color: #ffe;
-  background-color: #f53;
+  color: #f53;
 }
 
 .cell--128 {
   color: #ffe;
-  background-color: #ec7;
+  color: #ec7;
   font-size: 8px;
 }
 
 .cell--256 {
   color: #ffe;
-  background-color: #ec6;
+  color: #ec6;
   font-size: 10px;
 }
 
 .cell--512 {
   color: #ffe;
-  background-color: #ec5;
+  color: #ec5;
   font-size: 9px;
 }
 
 .cell--1024 {
   color: #fff;
-  background-color: #ec3;
+  color: #ec3;
   font-size: 8px;
 }
 
 .cell--2048 {
   color: #fff;
-  background-color: #ec2;
+  color: #ec2;
   font-size: 7px;
 }

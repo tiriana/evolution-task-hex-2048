@@ -20,3 +20,27 @@ export const range: (
 
   return range;
 };
+
+export const shift: (s: number[]) => number[] = (seq: number[] = []) => {
+  const noZeros: number[] = seq.filter(Boolean);
+  const newSeq: number[] = [];
+  for (let i = 0; i < noZeros.length; i++) {
+    const curr = noZeros[i];
+    const next = noZeros[i + 1];
+    if (!curr) {
+      continue; // nothing to do
+    }
+    if (!next) {
+      newSeq.push(curr); // this is the last number - just add it to the new sequence
+      continue;
+    }
+    if (next === curr) {
+      newSeq.push(curr << 1); // Add numbers and add to new sequence
+      i++; // 'swallow' one of the numbers
+      continue;
+    }
+    newSeq.push(curr);
+  }
+  const zeros = [...Array(seq.length - newSeq.length)].fill(0); // TODO - use for loop to uptimize
+  return [...zeros, ...newSeq];
+};

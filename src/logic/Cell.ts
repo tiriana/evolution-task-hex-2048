@@ -13,7 +13,7 @@ export default class Cell {
     this.board = board;
   }
 
-  get isEmpty(): boolean {
+  isEmpty(): boolean {
     return this.value === 0;
   }
 

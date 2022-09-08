@@ -2,6 +2,8 @@ import Direction from "./Direction";
 import Cell from "./Cell";
 import { OutOfTheBoard } from "./OutOfTheBoard";
 import CellsLine from "./CellsLine";
+import Vector3 from "./Vector3";
+import { shift } from "./utils";
 
 // coordinates
 // x (q) - top - bottom
@@ -29,16 +31,62 @@ export default class Board {
     this.radius = radiusIncludingCenter;
     this.ringsNum = this.radius - 1;
     this.howManyCells = 1 + 3 * this.ringsNum * (this.ringsNum + 1);
-    // this.maxCellsInLine = 2 * this.radius + 1;
     this.cells = new Array(this.howManyCells);
 
-    this.buildCells(); // could be done lazy, but there's no real need for this for this task
+    this.buildCells();
   }
 
   getCell(x: number, y: number, z: number): Cell {
     const cell: Cell | undefined = this.cube.get(x)?.get(y)?.get(z);
     if (!cell) throw new OutOfTheBoard(this, x, y, z);
     return cell;
+  }
+
+  hasCell(x: number, y: number, z: number): boolean {
+    return !!this.cube.get(x)?.get(y)?.get(z);
+  }
+
+  hasMove() {
+    for (let i = 0; i < this.cells.length; i++) {
+      const cell: Cell = this.cells[i];
+      if (cell.isEmpty()) return true;
+
+      // check if has a neighbour with the same value
+      for (let j = 0; j < Direction.ALL_CLOCKWISE.length; j++) {
+        const neighbourDirection: Direction = Direction.ALL_CLOCKWISE[i];
+        const x: number = cell.x + neighbourDirection.x;
+        const y: number = cell.y + neighbourDirection.y;
+        const z: number = cell.z + neighbourDirection.z;
+
+        if (!this.hasCell(x, y, z)) {
+          continue; // there's no cell in neighbourDirection Direction
+        }
+
+        const neighbour: Cell = this.getCell(x, y, z);
+
+        if (cell.value === neighbour.value) {
+          return true;
+        }
+      }
+    }
+    return false; // GAME OVER
+  }
+
+  fromValues(values: number[]): this {
+    for (let i = 0; i < this.cells.length; i++) {
+      this.cells[i].value = values[i];
+    }
+    return this;
+  }
+
+  makeMove(direction: Direction): this {
+    const chords: Chord[] = this.getChords(direction);
+
+    chords.forEach((chord: Chord) => {
+      chord.fromValues(shift(chord.values()));
+    });
+
+    return this;
   }
 
   getEdge(direction: Direction): Edge {
@@ -122,11 +170,4 @@ export default class Board {
 
     yLayer?.set(cell.z, cell);
   }
-
-  private buildLanes(): void {
-    Direction.ALL_CLOCKWISE.forEach((direction: Direction) => {});
-    // for Every direction there are 2*radius + 1 lanes
-  }
-
-  private findLanesForDirection(direction: Direction): void {}
 }
