@@ -100,7 +100,7 @@ export default class Board {
       const maxY = Math.min(this.radius, -x + this.radius);
 
       for (let y = minY; y <= maxY; y++) {
-        this.addCell(new Cell(x, y, -x - y), cellsCount++);
+        this.addCell(new Cell(x, y, -x - y, this), cellsCount++);
       }
     }
   }

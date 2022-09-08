@@ -1,13 +1,16 @@
 import Vector3 from "./Vector3";
+import Board from "./Board";
 
 class CellPosition extends Vector3<number> {}
 
 export default class Cell {
-  position: CellPosition;
+  readonly position: CellPosition;
   value: number = 0;
+  readonly board: Board;
 
-  constructor(x: number, y: number, z: number) {
+  constructor(x: number, y: number, z: number, board: Board) {
     this.position = new CellPosition(x, y, z);
+    this.board = board;
   }
 
   get isEmpty(): boolean {

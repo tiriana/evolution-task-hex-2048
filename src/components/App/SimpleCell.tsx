@@ -3,6 +3,8 @@ import { Cell } from "../../logic/GameLogic";
 
 import style from "./SimpleCell.module.scss";
 
+import classNames from "classnames";
+
 function cube_to_oddq(hex: Cell) {
   var col = hex.q;
   var row = hex.r + (hex.q - (hex.q & 1)) / 2 + (hex.q & 1) / 2;
@@ -15,13 +17,19 @@ type SimpleCellProps = {
 };
 
 const SimpleCell: React.FC<SimpleCellProps> = ({ cell }: SimpleCellProps) => {
+  const size = 200 / cell.board.radius;
+  const top = cell.board.radius * size;
+  const left = cell.board.radius * size;
+
   return (
     <div
-      className={style.hexagon}
+      className={classNames(style.cell, style[`cell--` + cell.value])}
       style={{
-        position: "absolute",
-        left: 300 + cube_to_oddq(cell)[0] * 100 + "px",
-        top: 300 + cube_to_oddq(cell)[1] * 100 + "px",
+        left: top + cube_to_oddq(cell)[0] * 0.72 * size + "px",
+        top: left + cube_to_oddq(cell)[1] * 0.82 * size + "px",
+
+        width: size + "px",
+        height: size + "px",
       }}
     >
       {/* {[...cell.position].join(",")} */}

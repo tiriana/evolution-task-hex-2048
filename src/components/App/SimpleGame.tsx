@@ -6,8 +6,8 @@ import KeyboardEventHandler from "@infinium/react-keyboard-event-handler";
 import { useState, useEffect, useReducer } from "react";
 
 export const SimpleGame: React.FC = () => {
-  const [board, setBoard] = useState(new BoardLogic(2));
-  const [move, setMove] = useState(new BoardLogic(2));
+  const [board, setBoard] = useState(new BoardLogic(5));
+  // const [move, setMove] = useState(new BoardLogic(2));
 
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
@@ -31,7 +31,6 @@ export const SimpleGame: React.FC = () => {
 
   return (
     <>
-      <SimpleBoard board={board} />
       <KeyboardEventHandler
         handleKeys={["q", "w", "e", "a", "s", "d"]}
         onKeyEvent={(key, e) => {
@@ -43,6 +42,7 @@ export const SimpleGame: React.FC = () => {
           forceUpdate();
         }}
       />
+      <SimpleBoard board={board} />
     </>
   );
 };
