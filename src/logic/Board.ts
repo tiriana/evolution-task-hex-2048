@@ -13,14 +13,17 @@ import { range } from "./utils";
 // / x \
 // \y_z/
 
+class Edge extends CellsLine {}
+class Diagonal extends CellsLine {}
+
 export default class Board {
   radius: number;
   ringsNum: number;
   cells: Cell[];
   cube: Map<number, Map<number, Map<number, Cell>>> = new Map();
-  lanes: Map<Direction, BoardLane> = new Map<Direction, BoardLane>();
 
-  edges: Map<Direction, CellsLine> = new Map<Direction, CellsLine>();
+  diagonals: Map<Direction, Diagonal> = new Map<Direction, Diagonal>();
+  edges: Map<Direction, Edge> = new Map<Direction, Edge>();
 
   private howManyCells: number;
 
@@ -32,7 +35,6 @@ export default class Board {
     this.cells = new Array(this.howManyCells);
 
     this.buildCells(); // could be done lazy, but there's no real need for this for this task
-    this.buildLanes(); // same as above
   }
 
   getCell(x: number, y: number, z: number): Cell {
@@ -41,7 +43,7 @@ export default class Board {
     return cell;
   }
 
-  getEdge(direction: Direction): CellsLine {
+  getEdge(direction: Direction): Edge {
     if (!this.edges.has(direction)) {
       const nextDirection: Direction = direction.nextCW();
       const vertex1: Cell = this.getCell(
@@ -56,9 +58,9 @@ export default class Board {
         nextDirection.z * this.radius
       );
 
-      this.edges.set(direction, new CellsLine(this, vertex1, vertex2));
+      this.edges.set(direction, new Edge(this, vertex1, vertex2));
     }
-    return this.edges.get(direction) as CellsLine;
+    return this.edges.get(direction) as Edge;
   }
 
   private buildCells(): void {
