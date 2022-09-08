@@ -25,4 +25,16 @@ export default class Cell {
   get z(): number {
     return this.position.z;
   }
+
+  get q(): number {
+    return this.x;
+  }
+
+  get r(): number {
+    return this.y;
+  }
+
+  get s(): number {
+    return this.z;
+  }
 }

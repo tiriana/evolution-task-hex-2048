@@ -20,18 +20,20 @@ const SimpleBoard: React.FC<SimpleBoardProps> = ({
   board,
 }: SimpleBoardProps) => {
   return (
-    <HexGrid width={1200} height={800} viewBox="-50 -50 100 100">
-      <Layout
-        size={{ x: 10, y: 10 }}
-        flat={true}
-        spacing={1.1}
-        origin={{ x: 0, y: 0 }}
-      >
-        {board.cells.map((cell: Cell) => {
-          return <SimpleCell key={[...cell.position].join(",")} cell={cell} />;
-        })}
-      </Layout>
-    </HexGrid>
+    <div>
+      {/* <HexGrid width={1200} height={800} viewBox="-50 -50 100 100">
+        <Layout
+          size={{ x: 10, y: 10 }}
+          flat={true}
+          spacing={1.1}
+          origin={{ x: 0, y: 0 }}
+        > */}
+      {board.cells.map((cell: Cell) => {
+        return <SimpleCell key={[...cell.position].join(",")} cell={cell} />;
+      })}
+      {/* </Layout>
+      </HexGrid> */}
+    </div>
   );
 };
 

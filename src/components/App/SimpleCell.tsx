@@ -5,26 +5,40 @@ import { Hexagon, Text, Pattern, Path, Hex } from "react-hexgrid";
 
 import style from "./SimpleCell.module.scss";
 
+function cube_to_oddq(hex: Cell) {
+  var col = hex.q;
+  var row = hex.r + (hex.q - (hex.q & 1)) / 2 + (hex.q & 1) / 2;
+
+  return [col, row];
+}
+
 type SimpleCellProps = {
   cell: Cell;
 };
 
 const SimpleCell: React.FC<SimpleCellProps> = ({ cell }: SimpleCellProps) => {
   return (
-    // <div>
-    //   [{cell.x}, {cell.y}, {cell.z}]: {cell.value}
-    // </div>
-    <Hexagon
-      key={cell.position.toString()}
-      className={[style.cell, style[`tile${cell.value}`]].join(" ")}
-      data={cell.position}
-      q={cell.x}
-      r={cell.y}
-      s={cell.z}
-      fill="black"
+    <div
+      style={{
+        position: "absolute",
+        left: 300 + cube_to_oddq(cell)[0] * 100 + "px",
+        top: 300 + cube_to_oddq(cell)[1] * 100 + "px",
+      }}
     >
-      <Text className={style.text}>{cell.value}</Text>
-    </Hexagon>
+      {/* {[...cell.position].join(",")} */}
+      {cell.value}
+    </div>
+    // <Hexagon
+    //   key={cell.position.toString()}
+    //   className={[style.cell, style[`tile${cell.value}`]].join(" ")}
+    //   data={cell.position}
+    //   q={cell.x}
+    //   r={cell.y}
+    //   s={cell.z}
+    //   fill="black"
+    // >
+    //   <Text className={style.text}>{cell.value}</Text>
+    // </Hexagon>
   );
 };
 

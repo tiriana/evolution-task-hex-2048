@@ -25,9 +25,9 @@ export const SimpleGame: React.FC = () => {
   // }, [board]);
 
   // set some cells for test
-  // board.getCell(0, 0, 0).value = 2;
-  // board.getCell(-2, 0, 2).value = 4;
-  // board.getCell(1, 1, -2).value = 2;
+  board.getCell(0, 0, 0).value = 2;
+  board.getCell(-2, 0, 2).value = 4;
+  board.getCell(1, 1, -2).value = 2;
 
   return (
     <>
@@ -35,6 +35,7 @@ export const SimpleGame: React.FC = () => {
       <KeyboardEventHandler
         handleKeys={["q", "w", "e", "a", "s", "d"]}
         onKeyEvent={(key, e) => {
+          console.log(key);
           const cell =
             board.cells[Math.floor(Math.random() * board.cells.length)];
           cell.value = cell.value === 0 ? 2 : cell.value * 2;
