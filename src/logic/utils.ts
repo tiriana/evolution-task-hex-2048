@@ -10,6 +10,8 @@ export const range: (
   const stepSize: -1 | 1 = start < end ? 1 : -1;
   const steps: number = Math.abs(end - start) + (inclusive ? 0 : -1);
 
+  if (steps < 0) return [];
+
   const range = new Array(steps);
   for (let step = 0, current = start; step <= steps; step++) {
     range[step] = current;
