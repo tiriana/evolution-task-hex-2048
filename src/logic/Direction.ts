@@ -3,6 +3,17 @@ import Vector3 from "./Vector3";
 type Directional = -1 | 0 | 1;
 
 export default class Direction extends Vector3<Directional> {
+  /**
+   * @returns next direction in clockwise order
+   */
+  nextCW(): Direction {
+    return Direction.NEXT_CW.get(this) as Direction;
+  }
+
+  next(): Direction {
+    return this.nextCW();
+  }
+
   private constructor(x: Directional, y: Directional, z: Directional) {
     super(x, y, z);
   }
@@ -30,16 +41,4 @@ export default class Direction extends Vector3<Directional> {
     [Direction.LEFT_DOWN, Direction.LEFT_UP],
     [Direction.LEFT_UP, Direction.UP],
   ]);
-
-  /**
-   *
-   * @returns next direction in clockwise order
-   */
-  nextCW(): Direction {
-    return Direction.NEXT_CW.get(this) as Direction;
-  }
-
-  next(): Direction {
-    return this.nextCW();
-  }
 }

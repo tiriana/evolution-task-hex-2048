@@ -1,6 +1,6 @@
 import Board from "./Board";
 import Direction from "./Direction";
-import { Cell } from "./Cell";
+import Cell from "./Cell";
 
 class BoardLaneIterator implements Iterator<Cell | undefined> {
   private n: number = 0;

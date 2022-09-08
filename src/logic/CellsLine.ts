@@ -1,6 +1,6 @@
 import Board from "./Board";
 import { range } from "./utils";
-import { Cell } from "./Cell";
+import Cell from "./Cell";
 
 export default class CellsLine {
   readonly board: Board;
@@ -37,5 +37,9 @@ export default class CellsLine {
     }
 
     Object.freeze(this._cells);
+  }
+
+  values(): number[] {
+    return this.cells.map((cell: Cell) => cell.value);
   }
 }

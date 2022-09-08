@@ -2,7 +2,7 @@ import Vector3 from "./Vector3";
 
 class CellPosition extends Vector3<number> {}
 
-export class Cell {
+export default class Cell {
   position: CellPosition;
   value: number = 0;
 
