@@ -7208,11 +7208,6 @@ jsprim@^1.2.2:
     array-includes "^3.1.2"
     object.assign "^4.1.2"
 
-just-range@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/just-range/-/just-range-4.1.1.tgz#343f10967e5a6e75a283d82538b44942b47fcc73"
-  integrity sha512-m8q77bxvcTuy/5YeVBgyY9K8+TZc/YRbYtH0ryAOu4F+YCIeS+Bi2vg9ibBw6Q/RZMrJKrTsKi3Ge3pZR9VuGQ==
-
 killable@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/killable/-/killable-1.0.1.tgz#4c8ce441187a061c7474fb87ca08e2a638194892"
