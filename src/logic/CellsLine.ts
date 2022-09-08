@@ -1,19 +1,22 @@
 import Board from "./Board";
 import { range } from "./utils";
-import { OutOfTheBoard } from "./OutOfTheBoard";
 import { Cell } from "./Cell";
 
-class CellsLine {
+export default class CellsLine {
   readonly board: Board;
   readonly start: Cell;
   readonly end: Cell;
-  private cells!: Cell[];
+  private _cells!: Cell[];
+
+  get cells(): Cell[] {
+    return this._cells;
+  }
 
   constructor(board: Board, start: Cell, end: Cell) {
     this.board = board;
     this.start = start;
     this.end = end;
-    this.build();
+    this.build(); // TODO: use Iterator instead of creating an array in constructor
   }
 
   private build(): void {
@@ -21,20 +24,18 @@ class CellsLine {
     const yRange = range(this.start.y, this.end.y);
     const zRange = range(this.start.z, this.end.z);
 
-    this.cells = new Array(
-        Math.max(xRange.length, yRange.length, zRange.length)
+    this._cells = new Array(
+      Math.max(xRange.length, yRange.length, zRange.length)
     );
 
-    for (let i = 0; i < this.cells.length; i++) {
+    for (let i = 0; i < this._cells.length; i++) {
       const x = xRange[i % xRange.length];
       const y = yRange[i % yRange.length];
       const z = zRange[i % zRange.length];
 
-      const cell: Cell | undefined = this.board.getCell(x, y, z);
-
-      if (!cell) throw new OutOfTheBoard(this.board, x, y, z);
-
-      this.cells[i] = cell;
+      this._cells[i] = this.board.getCell(x, y, z);
     }
+
+    Object.freeze(this._cells);
   }
 }

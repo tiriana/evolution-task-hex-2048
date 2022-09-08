@@ -1,4 +1,6 @@
-import { CellPosition } from "./CellPosition";
+import Vector3 from "./Vector3";
+
+class CellPosition extends Vector3<number> {}
 
 export class Cell {
   position: CellPosition;
@@ -24,4 +26,3 @@ export class Cell {
     return this.position.z;
   }
 }
-

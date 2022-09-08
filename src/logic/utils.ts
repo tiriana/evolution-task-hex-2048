@@ -1,7 +1,7 @@
 export const range: (
   start: number,
   end: number,
-  inclusive: boolean
+  inclusive?: boolean
 ) => number[] = (
   start: number,
   end: number = start,

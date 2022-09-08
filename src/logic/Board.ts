@@ -1,6 +1,7 @@
 import Direction from "./Direction";
 import { Cell } from "./Cell";
 import { BoardLane } from "./BoardLane";
+import { OutOfTheBoard } from "./OutOfTheBoard";
 
 // coordinates
 // x (q) - top - bottom
@@ -30,8 +31,10 @@ export default class Board {
     this.buildLanes(); // same as above
   }
 
-  getCell(x: number, y: number, z: number): Cell | undefined {
-    return this.cube.get(x)?.get(y)?.get(z);
+  getCell(x: number, y: number, z: number): Cell {
+    const cell: Cell | undefined = this.cube.get(x)?.get(y)?.get(z);
+    if (!cell) throw new OutOfTheBoard(this, x, y, z);
+    return cell;
   }
 
   getEdge(direction: Direction): Cell[] {}
