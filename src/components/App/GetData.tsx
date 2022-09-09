@@ -18,15 +18,10 @@ export const GetData: React.FC<GetDataProps> = ({
   useEffect(() => {
     const url = `http://${hostname}:${port}/${radius}`;
 
-    console.log("REQUEST");
-    console.table(request);
-
     axios
       .post(url, request)
       .then((response: AxiosResponse<RngServerResponse>) => {
         onReceived(response.data);
-        console.log("RESPONSE");
-        console.table(response.data);
       })
       .catch((error: AxiosError) => {
         console.error(error); // TODO add better error handling

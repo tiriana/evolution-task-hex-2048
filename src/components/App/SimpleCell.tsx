@@ -17,9 +17,9 @@ type SimpleCellProps = {
 };
 
 const SimpleCell: React.FC<SimpleCellProps> = ({ cell }: SimpleCellProps) => {
-  const size = 100;
-  const top = 20 + cell.board.radius * size;
-  const left = 200 + cell.board.radius * size;
+  const size = parseInt(style.cellSize, 10);
+  const top = 0; //20 + cell.board.radius * size;
+  const left = 0; // 200 + cell.board.radius * size;
 
   return (
     <div
@@ -27,19 +27,24 @@ const SimpleCell: React.FC<SimpleCellProps> = ({ cell }: SimpleCellProps) => {
       data-x={cell.x}
       data-y={cell.y}
       data-z={cell.z}
-      className={classNames(style.cell, style[`cell--` + cell.value])}
+      className={style.cell}
       style={{
-        left: left + cube_to_oddq(cell)[0] * 0.72 * size + "px",
-        top: top + cube_to_oddq(cell)[1] * 0.82 * size + "px",
-
-        width: size + "px",
-        height: size + "px",
+        left: cube_to_oddq(cell)[0] * 0.72 * size + "px",
+        top: cube_to_oddq(cell)[1] * 0.82 * size + "px",
       }}
     >
-      {cell.value ? cell.value : ""}
-      <span className={style.coord_X}>{cell.x}</span>
+      <div
+        className={classNames(
+          style.inner,
+          style[`value--` + Math.min(cell.value, 2049)]
+        )}
+      >
+        {cell.value ? cell.value : ""}
+      </div>
+
+      {/* <span className={style.coord_X}>{cell.x}</span>
       <span className={style.coord_Y}>{cell.y}</span>
-      <span className={style.coord_Z}>{cell.z}</span>
+      <span className={style.coord_Z}>{cell.z}</span> */}
     </div>
   );
 };

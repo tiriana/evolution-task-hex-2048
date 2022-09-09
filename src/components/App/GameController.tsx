@@ -9,8 +9,6 @@ import { GameStateBadge } from "./GameStateBadge";
 import Direction from "../../logic/Direction";
 import Cell from "../../logic/Cell";
 
-import { useReducer } from "react";
-
 import { default as BoardLogic } from "../../logic/Board";
 import { GetData } from "./GetData";
 import { RngServerResponse } from "./RngServerResponse";
@@ -44,8 +42,6 @@ const GameController: React.FC<GameConfig> = ({ hostname, port, radius }) => {
   const [response, setResponse] = useState([] as RngServerResponse);
 
   const [board, setBoard] = useState(new BoardLogic(radius - 1));
-
-  // const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
   window.bag = {
     board,
@@ -91,7 +87,7 @@ const GameController: React.FC<GameConfig> = ({ hostname, port, radius }) => {
   );
 
   return (
-    <>
+    <div className={"mainContainer"}>
       {waitingForData && (
         <GetData
           {...{ hostname, port, radius }}
@@ -101,12 +97,11 @@ const GameController: React.FC<GameConfig> = ({ hostname, port, radius }) => {
       )}
       {waitingForInput && board.hasMove() && <MoveListener onMove={onMove} />}
 
-      {debug}
-
-      <GameStateBadge hasMove={board.hasMove()} />
+      {/* {debug} */}
 
       <SimpleBoard board={board} />
-    </>
+      <GameStateBadge hasMove={board.hasMove()} />
+    </div>
   );
 };
 
