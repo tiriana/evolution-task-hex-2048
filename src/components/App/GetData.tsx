@@ -16,7 +16,7 @@ export const GetData: React.FC<GetDataProps> = ({
   request,
 }) => {
   useEffect(() => {
-    const url = `http://${hostname}:${port}/${radius}`;
+    const url = `${window.location.protocol}://${hostname}:${port}/${radius}`;
 
     axios
       .post(url, request)
