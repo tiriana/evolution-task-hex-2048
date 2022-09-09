@@ -7,19 +7,17 @@ describe("game board", () => {
     let board: Board;
 
     beforeAll(() => {
-      board = new Board(3);
-      board.cells.forEach(
-        (cell: Cell) => (cell.value = 100 * cell.x + 10 * cell.y + cell.z)
-      );
+      board = new Board(1);
+      board.cells.forEach((cell: Cell, index) => (cell.value = index));
     });
 
     test.each([
-      ["UP", Direction.UP, [27, 117, 207, 297]],
-      ["RIGHT_UP", Direction.RIGHT_UP, [297, 288, 279, 270]],
-      ["RIGHT_DOWN", Direction.RIGHT_DOWN, [270, 171, 72, -27]],
-      ["DOWN", Direction.DOWN, [-27, -117, -207, -297]],
-      ["LEFT_DOWN", Direction.LEFT_DOWN, [-297, -288, -279, -270]],
-      ["LEFT_UP", Direction.LEFT_UP, [-270, -171, -72, 27]],
+      ["UP", Direction.UP, [2, 5]],
+      ["RIGHT_UP", Direction.RIGHT_UP, [5, 6]],
+      ["RIGHT_DOWN", Direction.RIGHT_DOWN, [6, 4]],
+      ["DOWN", Direction.DOWN, [4, 1]],
+      ["LEFT_DOWN", Direction.LEFT_DOWN, [1, 0]],
+      ["LEFT_UP", Direction.LEFT_UP, [0, 2]],
     ])(
       "Should return correct edge for direction %s",
       (_, direction: Direction, values: number[]) => {
@@ -33,9 +31,7 @@ describe("game board", () => {
 
     beforeAll(() => {
       board = new Board(1);
-      board.cells.forEach(
-        (cell: Cell) => (cell.value = 100 * cell.x + 10 * cell.y + cell.z)
-      );
+      board.cells.forEach((cell: Cell, index) => (cell.value = index));
     });
 
     test.each([
@@ -43,58 +39,58 @@ describe("game board", () => {
         "UP",
         Direction.UP,
         [
-          [90, 99],
-          [-9, 0, 9],
-          [-99, -90],
+          [6, 5],
+          [4, 3, 2],
+          [1, 0],
         ],
       ],
       [
         "RIGHT_UP",
         Direction.RIGHT_UP,
         [
-          [-9, 90],
-          [-99, 0, 99],
-          [-90, 9],
+          [4, 6],
+          [1, 3, 5],
+          [0, 2],
         ],
       ],
       [
         "RIGHT_DOWN",
         Direction.RIGHT_DOWN,
         [
-          [-99, -9],
-          [-90, 0, 90],
-          [9, 99],
+          [1, 4],
+          [0, 3, 6],
+          [2, 5],
         ],
       ],
       [
         "DOWN",
         Direction.DOWN,
         [
-          [-90, -99],
-          [9, 0, -9],
-          [99, 90],
+          [0, 1],
+          [2, 3, 4],
+          [5, 6],
         ],
       ],
       [
         "LEFT_DOWN",
         Direction.LEFT_DOWN,
         [
-          [9, -90],
-          [99, 0, -99],
-          [90, -9],
+          [2, 0],
+          [5, 3, 1],
+          [6, 4],
         ],
       ],
       [
         "LEFT_UP",
         Direction.LEFT_UP,
         [
-          [99, 9],
-          [90, 0, -90],
-          [-9, -99],
+          [5, 2],
+          [6, 3, 0],
+          [4, 1],
         ],
       ],
     ])(
-      "Should return correct edge for direction %s",
+      "Should return correct chord for direction %s",
       (_, direction: Direction, expected: number[][]) => {
         const chords = board.getChords(direction);
         const actual = chords.map((chord) => chord.values());
