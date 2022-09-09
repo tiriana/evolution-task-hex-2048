@@ -6,21 +6,18 @@ import SimpleBoard from "./SimpleBoard";
 
 import { useState, useReducer } from "react";
 import { MoveListener } from "./MoveListener";
+import { GameStateBadge } from "./GameStateBadge";
+import { range } from "../../logic/utils";
 
 declare global {
   interface Window {
     bag: any;
   }
 }
-type GameStateProps = {
-  hasMove: boolean;
-};
-export const GameState: React.FC<GameStateProps> = ({ hasMove }) => {
-  return <div>{hasMove ? "playing" : "game-over"}</div>;
-};
-
 export const SimpleGame: React.FC = () => {
-  const [board, setBoard] = useState(new BoardLogic(2).fromValues([2, 2, 2]));
+  const [board, setBoard] = useState(
+    new BoardLogic(3).fromValues(range(1, 37))
+  );
 
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
@@ -41,7 +38,7 @@ export const SimpleGame: React.FC = () => {
   return (
     <>
       {board.hasMove() && <MoveListener onMove={onMove} />}
-      <GameState hasMove={board.hasMove()} />
+      <GameStateBadge hasMove={board.hasMove()} />
       <SimpleBoard board={board} />
     </>
   );

@@ -38,7 +38,7 @@ export default class Vector3<T> implements Iterable<T> {
       next() {
         return {
           value: arr[n],
-          done: 3 < n++,
+          done: 3 <= n++,
         };
       },
     };

@@ -1,6 +1,7 @@
 import React from "react";
-import { SimpleGame } from "./SimpleGame";
+import GameController from "./GameController";
+import { ConfigReader } from "./ConfigReader";
 
 export const App: React.FC = () => {
-  return <SimpleGame />;
+  return <ConfigReader GameController={GameController} />;
 };

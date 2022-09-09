@@ -154,6 +154,18 @@ export default class Board {
       for (let y = minY; y <= maxY; y++) {
         this.addCell(new Cell(x, y, -x - y, this), cellsCount++);
       }
+
+      // this.cells.sort((c1: Cell, c2: Cell) => {
+      //   const ring1 = Math.max(Math.abs(c1.x), Math.abs(c1.y), Math.abs(c1.z));
+      //   const ring2 = Math.max(Math.abs(c2.x), Math.abs(c2.y), Math.abs(c2.z));
+
+      //   console.log({ ring1, ring2 }, ...c1.position, ...c2.position);
+
+      //   const magnitude1 = 1000 * ring1 + 100 * c1.x + 10 * c1.y;
+      //   const magnitude2 = 1000 * ring2 + 100 * c2.x + 10 * c2.y;
+
+      //   return magnitude1 - magnitude2;
+      // });
     }
   }
 
