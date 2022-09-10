@@ -41,7 +41,7 @@
     "test:coverage": "yarn test:unit -- --coverage --watchAll=false",
     "test:local": "DELAY_BETWEEN_ACTIONS=150 jest --runInBand --config jest.e2e.config.js",
     "test:surge": "JEST_PUPPETEER_CONFIG=jest-puppeteer.config-https.js USE_HTTPS=1 jest --runInBand --config jest.e2e.config.js",
-    "test": "react-scripts build && JEST_PUPPETEER_CONFIG=jest-puppeteer.ci.js jest --runInBand --config jest.e2e.config.js",
+    "test": "DELAY_BETWEEN_ACTIONS=150 react-scripts build && JEST_PUPPETEER_CONFIG=jest-puppeteer.ci.js jest --runInBand --config jest.e2e.config.js",
     "deploy": "yarn build && yarn surge ./build CodeScreen_tst3puw4.surge.sh"
   },
   "eslintConfig": {
