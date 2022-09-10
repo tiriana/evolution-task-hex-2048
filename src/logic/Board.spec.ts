@@ -12,12 +12,12 @@ describe("game board", () => {
     });
 
     test.each([
-      ["UP", Direction.UP, [2, 5]],
-      ["RIGHT_UP", Direction.RIGHT_UP, [5, 6]],
-      ["RIGHT_DOWN", Direction.RIGHT_DOWN, [6, 4]],
-      ["DOWN", Direction.DOWN, [4, 1]],
-      ["LEFT_DOWN", Direction.LEFT_DOWN, [1, 0]],
-      ["LEFT_UP", Direction.LEFT_UP, [0, 2]],
+      ["UP", Direction.UP, [4, 6]],
+      ["RIGHT_UP", Direction.RIGHT_UP, [6, 5]],
+      ["RIGHT_DOWN", Direction.RIGHT_DOWN, [5, 2]],
+      ["DOWN", Direction.DOWN, [2, 0]],
+      ["LEFT_DOWN", Direction.LEFT_DOWN, [0, 1]],
+      ["LEFT_UP", Direction.LEFT_UP, [1, 4]],
     ])(
       "Should return correct edge for direction %s",
       (_, direction: Direction, values: number[]) => {
@@ -39,54 +39,54 @@ describe("game board", () => {
         "UP",
         Direction.UP,
         [
-          [6, 5],
-          [4, 3, 2],
-          [1, 0],
+          [5, 6],
+          [2, 3, 4],
+          [0, 1],
         ],
       ],
       [
         "RIGHT_UP",
         Direction.RIGHT_UP,
         [
-          [4, 6],
-          [1, 3, 5],
-          [0, 2],
+          [2, 5],
+          [0, 3, 6],
+          [1, 4],
         ],
       ],
       [
         "RIGHT_DOWN",
         Direction.RIGHT_DOWN,
         [
-          [1, 4],
-          [0, 3, 6],
-          [2, 5],
+          [0, 2],
+          [1, 3, 5],
+          [4, 6],
         ],
       ],
       [
         "DOWN",
         Direction.DOWN,
         [
-          [0, 1],
-          [2, 3, 4],
-          [5, 6],
+          [1, 0],
+          [4, 3, 2],
+          [6, 5],
         ],
       ],
       [
         "LEFT_DOWN",
         Direction.LEFT_DOWN,
         [
-          [2, 0],
-          [5, 3, 1],
-          [6, 4],
+          [4, 1],
+          [6, 3, 0],
+          [5, 2],
         ],
       ],
       [
         "LEFT_UP",
         Direction.LEFT_UP,
         [
-          [5, 2],
-          [6, 3, 0],
-          [4, 1],
+          [6, 4],
+          [5, 3, 1],
+          [2, 0],
         ],
       ],
     ])(
