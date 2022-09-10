@@ -15,8 +15,6 @@ import { RngServerResponse } from "./RngServerResponse";
 import { HexSimple } from "./HexSimple";
 import { RngServerRequest } from "./RngServerRequest";
 
-import env from "./env";
-
 const cellToSimpleHex: (cell: Cell) => HexSimple = (cell: Cell) => {
   return {
     x: cell.x,
@@ -85,28 +83,6 @@ const GameController: React.FC<GameConfig> = ({ hostname, port, radius }) => {
     setWaitingForInput(true);
   };
 
-  const debug = (
-    <pre
-      style={{
-        position: "fixed",
-        right: 0,
-      }}
-    >
-      {JSON.stringify(
-        {
-          hostname,
-          port,
-          radius,
-          response,
-          waitingForData,
-          waitingForInput,
-        },
-        null,
-        2
-      )}
-    </pre>
-  );
-
   return (
     <div className={"mainContainer"}>
       {waitingForData && (
@@ -117,8 +93,6 @@ const GameController: React.FC<GameConfig> = ({ hostname, port, radius }) => {
         />
       )}
       {waitingForInput && board.hasMove() && <MoveListener onMove={onMove} />}
-
-      {env.debug && debug}
 
       <SimpleBoard board={board} />
       <GameStateBadge hasMove={board.hasMove()} />

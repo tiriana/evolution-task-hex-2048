@@ -1,7 +1,7 @@
-import axios from "axios";
 import { render } from "@testing-library/react"; // cleanup is automatic
 import { GetData } from "./GetData";
 import { RngServerRequest } from "./RngServerRequest";
+import axios from "axios";
 jest.mock("axios");
 
 const tick = async () => new Promise((r) => setImmediate(r));
@@ -15,7 +15,7 @@ it("Gets the data", async () => {
   const radius = 20;
   const request: RngServerRequest = [];
 
-  axios.post.mockResolvedValue({ data: response });
+  axios.post.mockResolvedValueOnce({ data: response });
 
   const url = `//${hostname}:${port}/${radius}`;
 

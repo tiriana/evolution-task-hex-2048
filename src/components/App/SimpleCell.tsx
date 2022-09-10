@@ -4,7 +4,6 @@ import Cell from "../../logic/Cell";
 import style from "./SimpleCell.module.scss";
 
 import classNames from "classnames";
-import env from "./env";
 
 function cube_to_oddq(hex: Cell) {
   var col = hex.q;
@@ -41,7 +40,7 @@ const SimpleCell: React.FC<SimpleCellProps> = ({ cell }: SimpleCellProps) => {
         {cell.value ? cell.value : ""}
       </div>
 
-      {env.debug && (
+      {process.env.NODE_ENV === "development" && (
         <div className={style.coords}>
           <span className={style.coord_X}>{cell.x}</span>
           <span className={style.coord_Y}>{cell.y}</span>

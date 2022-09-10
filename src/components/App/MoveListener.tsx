@@ -14,6 +14,7 @@ export const MoveListener: React.FC<MoveListenerProps> = ({ onMove }) => {
     s: Direction.DOWN,
     a: Direction.LEFT_DOWN,
   };
+
   return (
     <KeyboardEventHandler
       handleEventType="keyup"
