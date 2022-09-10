@@ -1,4 +1,4 @@
-const { Server } = require("./rngServer")
+const { Server } = require("./rngServerSSL");
 
-const server = new Server()
-server.start()
+const server = new Server();
+server.start();

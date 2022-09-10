@@ -38,6 +38,7 @@
     "start-server": "node rng-server/index.js",
     "test:unit": "react-scripts test",
     "test:local": "jest --runInBand --config jest.e2e.config.js",
+    "test:surge": "JEST_PUPPETEER_CONFIG=jest-puppeteer.config-https.js USE_HTTPS=1 jest --runInBand --config jest.e2e.config.js",
     "test": "react-scripts build && JEST_PUPPETEER_CONFIG=jest-puppeteer.ci.js jest --runInBand --config jest.e2e.config.js",
     "deploy": "yarn build && yarn surge ./build CodeScreen_tst3puw4.surge.sh"
   },

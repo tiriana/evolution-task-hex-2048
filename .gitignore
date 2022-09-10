@@ -25,3 +25,6 @@ yarn-error.log*
 .yarn/cache
 
 .idea
+
+cert.pem
+key.pem

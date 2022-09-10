@@ -2,7 +2,9 @@
 require("expect-puppeteer");
 
 const { getFieldPoints } = require("../rng-server/fieldUtils");
-const { Server } = require("../rng-server/rngServer");
+const { Server } = require(process.env.USE_HTTPS
+  ? "../rng-server/rngServerSSL"
+  : "../rng-server/rngServer");
 const {
   readDOMField,
   getDataStatus,
@@ -31,7 +33,7 @@ describe("Hex game launch", () => {
   describe("radius 2", () => {
     radius = 2;
 
-    it.only("should render correct field with data-x, data-y, data-z, data-value with 0", async () => {
+    it("should render correct field with data-x, data-y, data-z, data-value with 0", async () => {
       const handler = jest.fn(() => [{ x: 0, y: 0, z: 0, value: 8 }]);
       const expected = getFieldPoints(radius).map((c) => ({ ...c, value: 0 }));
       const cellWithScore = expected.find(

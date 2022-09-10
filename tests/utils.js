@@ -1,7 +1,7 @@
 const { getFieldPoints } = require("../rng-server/fieldUtils");
 const { URL, URLSearchParams } = require("url");
 
-const DELAY_BETWEEN_ACTIONS = 150;
+const DELAY_BETWEEN_ACTIONS = +process.env.DELAY_BETWEEN_ACTIONS || 800;
 
 const getDataValue = (e) => e.evaluate((e) => e.getAttribute("data-value"));
 const getDataStatus = (e) => e.evaluate((e) => e.getAttribute("data-status"));
@@ -29,13 +29,15 @@ async function readDOMField(page, radius) {
 const setupPage = async (browser, href, radius) => {
   const page = await browser.newPage();
   const testHref = new URL(href);
-  const searchParams = new URLSearchParams();
 
-  searchParams.append("hostname", "localhost");
-  searchParams.append("port", "13337");
-  searchParams.append("radius", radius);
+  testHref.searchParams.has("hostname") ||
+    testHref.searchParams.set("hostname", "localhost");
+  testHref.searchParams.has("port") ||
+    testHref.searchParams.set("port", "13337");
 
-  const url = testHref.toString() + "?" + searchParams.toString();
+  testHref.searchParams.set("radius", radius);
+
+  const url = testHref.toString();
 
   await page.goto(url);
   await delay(DELAY_BETWEEN_ACTIONS);
