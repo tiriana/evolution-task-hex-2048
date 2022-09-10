@@ -15,6 +15,8 @@ import { RngServerResponse } from "./RngServerResponse";
 import { HexSimple } from "./HexSimple";
 import { RngServerRequest } from "./RngServerRequest";
 
+import env from "./env";
+
 const cellToSimpleHex: (cell: Cell) => HexSimple = (cell: Cell) => {
   return {
     x: cell.x,
@@ -36,12 +38,28 @@ const boardToRequest: (board: BoardLogic) => RngServerRequest = (
   return request;
 };
 
+declare global {
+  interface Window {
+    bag: any;
+  }
+}
+
 const GameController: React.FC<GameConfig> = ({ hostname, port, radius }) => {
   const [waitingForData, setWaitingForData] = useState(true);
   const [waitingForInput, setWaitingForInput] = useState(false);
   const [response, setResponse] = useState([] as RngServerResponse);
 
-  const [board, setBoard] = useState(new BoardLogic(radius - 1));
+  const [board, setBoard] = useState(
+    new BoardLogic(radius - 1).fromValues([
+      // 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+      // 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
+    ])
+  );
+
+  window.bag = {
+    board,
+    Direction,
+  };
 
   window.bag = {
     board,
@@ -97,7 +115,7 @@ const GameController: React.FC<GameConfig> = ({ hostname, port, radius }) => {
       )}
       {waitingForInput && board.hasMove() && <MoveListener onMove={onMove} />}
 
-      {/* {debug} */}
+      {env.debug && debug}
 
       <SimpleBoard board={board} />
       <GameStateBadge hasMove={board.hasMove()} />

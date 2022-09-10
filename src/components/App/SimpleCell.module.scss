@@ -104,27 +104,39 @@ $value_dark: rgb(119, 110, 101);
   font-size: 120px;
 }
 
+.coords {
+  display: flex;
+  position: absolute;
+  top: 30px;
+  justify-content: center;
+  align-items: center;
+
+  height: $cell-size;
+  width: $cell-size;
+  // border: 1px solid red;
+}
+
 .coord_X,
 .coord_Y,
 .coord_Z {
-  font-size: 15px;
+  font-size: 60px;
   position: absolute;
 }
 
 .coord_X {
-  top: 10px;
+  margin-top: 2px;
   color: blue;
 }
 
 .coord_Y {
-  left: 18px;
-  bottom: 25px;
-  color: orange;
+  left: 16%;
+  bottom: 35%;
+  color: yellow;
 }
 
 .coord_Z {
-  right: 18px;
-  bottom: 25px;
+  right: 16%;
+  bottom: 35%;
   color: green;
 }
 

@@ -1,7 +1,7 @@
 const { getFieldPoints } = require("../rng-server/fieldUtils");
 const { URL, URLSearchParams } = require("url");
 
-const DELAY_BETWEEN_ACTIONS = 800;
+const DELAY_BETWEEN_ACTIONS = 50;
 
 const getDataValue = (e) => e.evaluate((e) => e.getAttribute("data-value"));
 const getDataStatus = (e) => e.evaluate((e) => e.getAttribute("data-status"));
@@ -15,7 +15,10 @@ async function readDOMField(page, radius) {
   return await Promise.all(
     fieldPoints.map(async ({ x, y, z }) => {
       const element = await page.waitForSelector(
-        `[data-x="${x}"][data-y="${y}"][data-z="${z}"]`
+        `[data-x="${x}"][data-y="${y}"][data-z="${z}"]`,
+        {
+          timeout: 200,
+        }
       );
       const value = parseInt(await getDataValue(element));
       return { x, y, z, value };

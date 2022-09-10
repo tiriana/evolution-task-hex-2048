@@ -4,12 +4,13 @@ import { Cell } from "../../logic/GameLogic";
 import style from "./SimpleCell.module.scss";
 
 import classNames from "classnames";
+import { env } from "process";
 
 function cube_to_oddq(hex: Cell) {
   var col = hex.q;
   var row = hex.r + (hex.q - (hex.q & 1)) / 2 + (hex.q & 1) / 2;
 
-  return [col, row];
+  return [col, -row]; // negative row because somehow I'm getting it flipped against horizontal symmetry line. Math is hard...
 }
 
 type SimpleCellProps = {
@@ -18,8 +19,6 @@ type SimpleCellProps = {
 
 const SimpleCell: React.FC<SimpleCellProps> = ({ cell }: SimpleCellProps) => {
   const size = parseInt(style.cellSize, 10);
-  const top = 0; //20 + cell.board.radius * size;
-  const left = 0; // 200 + cell.board.radius * size;
 
   return (
     <div
@@ -42,9 +41,13 @@ const SimpleCell: React.FC<SimpleCellProps> = ({ cell }: SimpleCellProps) => {
         {cell.value ? cell.value : ""}
       </div>
 
-      {/* <span className={style.coord_X}>{cell.x}</span>
-      <span className={style.coord_Y}>{cell.y}</span>
-      <span className={style.coord_Z}>{cell.z}</span> */}
+      {env.debug && (
+        <div className={style.coords}>
+          <span className={style.coord_X}>{cell.x}</span>
+          <span className={style.coord_Y}>{cell.y}</span>
+          <span className={style.coord_Z}>{cell.z}</span>
+        </div>
+      )}
     </div>
   );
 };

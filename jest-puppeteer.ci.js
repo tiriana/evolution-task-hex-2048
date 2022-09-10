@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   launch: {
-    headless: false,
+    headless: true,
   },
   server: {
     command: `${path.join("node_modules", ".bin", "serve")} -s build -l 3000`,

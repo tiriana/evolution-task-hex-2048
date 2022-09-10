@@ -2,7 +2,6 @@ import Direction from "./Direction";
 import Cell from "./Cell";
 import { OutOfTheBoard } from "./OutOfTheBoard";
 import CellsLine from "./CellsLine";
-import Vector3 from "./Vector3";
 import { shift } from "./utils";
 
 // coordinates
@@ -42,7 +41,10 @@ export default class Board {
 
   getCell(x: number, y: number, z: number): Cell {
     const cell: Cell | undefined = this.cube.get(x)?.get(y)?.get(z);
-    if (!cell) throw new OutOfTheBoard(this, x, y, z);
+    if (!cell) {
+      debugger;
+      throw new OutOfTheBoard(this, x, y, z);
+    }
     return cell;
   }
 
@@ -96,19 +98,19 @@ export default class Board {
   getEdge(direction: Direction): Edge {
     if (!this.edges.has(direction)) {
       const nextDirection: Direction = direction.next();
-      const vertex1: Cell = this.getCell(
+      const start: Cell = this.getCell(
         direction.x * this.radius,
         direction.y * this.radius,
         direction.z * this.radius
       );
 
-      const vertex2: Cell = this.getCell(
+      const end: Cell = this.getCell(
         nextDirection.x * this.radius,
         nextDirection.y * this.radius,
         nextDirection.z * this.radius
       );
 
-      this.edges.set(direction, new Edge(this, vertex1, vertex2));
+      this.edges.set(direction, new Edge(this, start, end));
     }
     return this.edges.get(direction) as Edge;
   }
