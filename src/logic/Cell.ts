@@ -5,12 +5,20 @@ class CellPosition extends Vector3<number> {}
 
 export default class Cell {
   readonly position: CellPosition;
-  value: number = 0;
+  private _value: number = 0;
   readonly board: Board;
 
   constructor(x: number, y: number, z: number, board: Board) {
     this.position = new CellPosition(x, y, z);
     this.board = board;
+  }
+
+  get value(): number {
+    return this._value;
+  }
+
+  set value(v: number) {
+    this._value = 0 | v;
   }
 
   isEmpty(): boolean {

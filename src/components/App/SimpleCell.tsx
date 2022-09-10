@@ -1,10 +1,10 @@
 import React from "react";
-import { Cell } from "../../logic/GameLogic";
+import Cell from "../../logic/Cell";
 
 import style from "./SimpleCell.module.scss";
 
 import classNames from "classnames";
-import { env } from "process";
+import env from "./env";
 
 function cube_to_oddq(hex: Cell) {
   var col = hex.q;

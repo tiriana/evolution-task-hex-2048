@@ -1,5 +1,6 @@
 import React from "react";
-import { Board as BoardLogic, Cell } from "../../logic/GameLogic";
+import { default as BoardLogic } from "../../logic/Board";
+import Cell from "../../logic/Cell";
 import SimpleCell from "./SimpleCell";
 
 import style from "./SimpleBoard.module.scss";

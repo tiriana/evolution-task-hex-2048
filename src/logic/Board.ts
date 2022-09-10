@@ -85,6 +85,10 @@ export default class Board {
     return this;
   }
 
+  values(): number[] {
+    return this.cells.map((cell: Cell) => cell.value);
+  }
+
   makeMove(direction: Direction): this {
     const chords: Chord[] = this.getChords(direction);
 
