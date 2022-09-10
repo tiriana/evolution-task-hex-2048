@@ -327,7 +327,6 @@ describe("Hex game launch", () => {
       server.changeHandler(serverHandler);
 
       const page = await setupPage(browser, href, radius);
-      page.setDefaultTimeout(200);
       await pressDirectionKeys(
         page,
         "DDADSASADDSASDQDAQAAAQWQWAAWAWWEAWEAWQWASWQDAD"
