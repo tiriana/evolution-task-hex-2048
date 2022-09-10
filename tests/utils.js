@@ -1,7 +1,7 @@
 const { getFieldPoints } = require("../rng-server/fieldUtils");
 const { URL, URLSearchParams } = require("url");
 
-const DELAY_BETWEEN_ACTIONS = 50;
+const DELAY_BETWEEN_ACTIONS = 150;
 
 const getDataValue = (e) => e.evaluate((e) => e.getAttribute("data-value"));
 const getDataStatus = (e) => e.evaluate((e) => e.getAttribute("data-status"));

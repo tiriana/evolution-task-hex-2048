@@ -31,7 +31,7 @@ describe("Hex game launch", () => {
   describe("radius 2", () => {
     radius = 2;
 
-    it("should render correct field with data-x, data-y, data-z, data-value with 0", async () => {
+    it.only("should render correct field with data-x, data-y, data-z, data-value with 0", async () => {
       const handler = jest.fn(() => [{ x: 0, y: 0, z: 0, value: 8 }]);
       const expected = getFieldPoints(radius).map((c) => ({ ...c, value: 0 }));
       const cellWithScore = expected.find(

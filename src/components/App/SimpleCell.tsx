@@ -22,7 +22,7 @@ const SimpleCell: React.FC<SimpleCellProps> = ({ cell }: SimpleCellProps) => {
 
   return (
     <div
-      data-value={cell.value}
+      data-value={0 | cell.value}
       data-x={cell.x}
       data-y={cell.y}
       data-z={cell.z}
