@@ -21,26 +21,20 @@ export const range: (
   return range;
 };
 
-export const shift: (s: number[]) => number[] = (seq: number[] = []) => {
-  const noZeros: number[] = seq.filter(Boolean);
-  const newSeq: number[] = [];
-  for (let i = 0; i < noZeros.length; i++) {
-    const curr = noZeros[i];
-    const next = noZeros[i + 1];
-    if (!curr) {
-      continue; // nothing to do
+export const shift: (s: number[]) => number[] = (line: number[] = []) => {
+  line = [...line].reverse();
+
+  let modLine = line.filter(Boolean);
+
+  for (let i = 1; i < modLine.length; i++) {
+    if (modLine[i] === modLine[i - 1]) {
+      modLine[i - 1] *= 2;
+      modLine[i] = 0;
     }
-    if (!next) {
-      newSeq.push(curr); // this is the last number - just add it to the new sequence
-      continue;
-    }
-    if (next === curr) {
-      newSeq.push(curr << 1); // Add numbers and add to new sequence
-      i++; // 'swallow' one of the numbers
-      continue;
-    }
-    newSeq.push(curr);
   }
-  const zeros = [...Array(seq.length - newSeq.length)].fill(0); // TODO - use for loop to uptimize
-  return [...zeros, ...newSeq];
+
+  modLine = modLine.filter(Boolean);
+  return modLine
+    .concat(new Array(line.length - modLine.length).fill(0))
+    .reverse();
 };
