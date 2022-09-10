@@ -18,20 +18,20 @@ jobs:
       - name: Run Jest tests
         run: yarn test:unit -- --watchAll=false
 
-  # e2e:
-  #   runs-on: ubuntu-20.04
-  #   container: lironavon/docker-puppeteer-container:14.16.0
-  #   steps:
-  #     - name: Set up node using nvm
-  #       uses: dcodeIO/setup-node-nvm@v4
-  #       with:
-  #         node-version: lts/*
+  e2e:
+    runs-on: ubuntu-20.04
+    container: lironavon/docker-puppeteer-container:14.16.0
+    steps:
+      - name: Set up node using nvm
+        uses: dcodeIO/setup-node-nvm@v4
+        with:
+          node-version: lts/*
 
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-  #     - name: Install dependencies
-  #       run: yarn install
+      - name: Install dependencies
+        run: yarn install
 
-  #     - name: Run e2e tests
-  #       run: yarn test -- --watchAll=false
+      - name: Run e2e tests
+        run: yarn test
