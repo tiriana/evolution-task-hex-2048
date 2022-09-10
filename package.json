@@ -37,6 +37,7 @@
     "build": "react-scripts --openssl-legacy-provider build",
     "start-server": "node rng-server/index.js",
     "test:unit": "react-scripts test",
+    "test:coverage": "react-scripts test -- --coverage --watchAll=false",
     "test:local": "DELAY_BETWEEN_ACTIONS=150 jest --runInBand --config jest.e2e.config.js",
     "test:surge": "JEST_PUPPETEER_CONFIG=jest-puppeteer.config-https.js USE_HTTPS=1 jest --runInBand --config jest.e2e.config.js",
     "test": "react-scripts build && JEST_PUPPETEER_CONFIG=jest-puppeteer.ci.js jest --runInBand --config jest.e2e.config.js",

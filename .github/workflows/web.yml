@@ -15,8 +15,8 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Run Jest tests
-        run: yarn test:unit -- --watchAll=false
+      - name: Run Jest tests with coverage
+        run: yarn test:coverage
 
   e2e:
     runs-on: ubuntu-20.04

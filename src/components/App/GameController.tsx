@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { GameConfig } from "./GameConfig";
 import SimpleBoard from "./SimpleBoard";
 import { MoveListener } from "./MoveListener";
@@ -36,28 +36,10 @@ const boardToRequest: (board: BoardLogic) => RngServerRequest = (
   return request;
 };
 
-declare global {
-  interface Window {
-    bag: any;
-  }
-}
-
 const GameController: React.FC<GameConfig> = ({ hostname, port, radius }) => {
   const [waitingForData, setWaitingForData] = useState(true);
   const [waitingForInput, setWaitingForInput] = useState(false);
-  const [response, setResponse] = useState([] as RngServerResponse);
-
-  const [board, setBoard] = useState(new BoardLogic(radius - 1));
-
-  window.bag = {
-    board,
-    Direction,
-  };
-
-  window.bag = {
-    board,
-    Direction,
-  };
+  const board: BoardLogic = useMemo(() => new BoardLogic(radius - 1), [radius]);
 
   const onMove = (dir: Direction) => {
     const before = board.values().join();
@@ -65,7 +47,6 @@ const GameController: React.FC<GameConfig> = ({ hostname, port, radius }) => {
     const after = board.values().join();
 
     if (before !== after) {
-      setBoard(board);
       setWaitingForInput(false);
       setWaitingForData(true);
     }
@@ -77,8 +58,6 @@ const GameController: React.FC<GameConfig> = ({ hostname, port, radius }) => {
     response.forEach(({ x, y, z, value }: HexSimple) => {
       board.getCell(x, y, z).value = value;
     });
-
-    setResponse(response);
 
     setWaitingForInput(true);
   };
