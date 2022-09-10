@@ -1,3 +1,9 @@
+[![Web CI](https://github.com/codescreen/CodeScreen_tst3puw4/actions/workflows/web.yml/badge.svg?branch=main)](https://github.com/codescreen/CodeScreen_tst3puw4/actions/workflows/web.yml)
+
+# LIVE VERSION: [https://codescreen_tst3puw4.surge.sh/](https://codescreen_tst3puw4.surge.sh/)
+
+---
+
 # Hexagonal 2048
 
 ## Task description
