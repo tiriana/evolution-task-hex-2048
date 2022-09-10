@@ -41,4 +41,22 @@ describe("CellsLine", () => {
       ).values()
     ).toEqual([-198, -108, -18]);
   });
+
+  test("fromValues should change cells values", () => {
+    const line: CellsLine = new CellsLine(
+      board,
+      board.getCell(-2, 0, 2),
+      board.getCell(0, -2, 2)
+    );
+
+    const values: number[] = line.values();
+
+    line.fromValues([100]);
+
+    expect(line.values()).toEqual([100, -108, -18]);
+
+    line.fromValues([100, 200, 300, 400, 500]);
+
+    expect(line.values()).toEqual([100, 200, 300]);
+  });
 });

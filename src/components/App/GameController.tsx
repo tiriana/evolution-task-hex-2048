@@ -86,7 +86,12 @@ const GameController: React.FC<GameConfig> = ({ hostname, port, radius }) => {
   };
 
   const debug = (
-    <pre>
+    <pre
+      style={{
+        position: "fixed",
+        right: 0,
+      }}
+    >
       {JSON.stringify(
         {
           hostname,

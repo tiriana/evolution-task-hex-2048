@@ -1,5 +1,5 @@
 const env = {
-  debug: true,
+  debug: process.env.NODE_ENV !== "production",
 };
 
 export default env;

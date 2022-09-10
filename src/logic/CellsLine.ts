@@ -44,7 +44,11 @@ export default class CellsLine {
   }
 
   fromValues(newValues: number[] = []): this {
-    for (let i = 0; i < this.cells.length; i++) {
+    for (
+      let i = 0, l: number = Math.min(newValues.length, this.cells.length);
+      i < l;
+      i++
+    ) {
       this.cells[i].value = newValues[i];
     }
     return this;

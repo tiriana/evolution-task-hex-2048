@@ -2,7 +2,6 @@ import Vector3 from "./Vector3";
 import Board from "./Board";
 
 class CellPosition extends Vector3<number> {}
-
 export default class Cell {
   readonly position: CellPosition;
   private _value: number = 0;

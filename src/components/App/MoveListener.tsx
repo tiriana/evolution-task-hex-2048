@@ -16,6 +16,7 @@ export const MoveListener: React.FC<MoveListenerProps> = ({ onMove }) => {
   };
   return (
     <KeyboardEventHandler
+      handleEventType="keyup"
       handleKeys={["q", "w", "e", "a", "s", "d"]}
       onKeyEvent={(key, e) => onMove(directionsMap[key])}
     />
