@@ -71,6 +71,7 @@
   "jest": {
     "transform": {
       "^.+\\.(ts|tsx|js|jsx)$": "ts-jest"
-    }
+    },
+    "coverageReporters": ["clover", "json", "lcov", "text", "text-summary"]
   }
 }
