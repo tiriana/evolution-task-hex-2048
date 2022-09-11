@@ -22,19 +22,29 @@ export const range: (
 };
 
 export const shift: (s: number[]) => number[] = (line: number[] = []) => {
-  line = [...line].reverse();
+  const result: number[] = new Array<number>(line.length);
+  let l: number = line.length - 1; // last empty
+  let z: number = 0; // zero index
+  let mem: number = 0;
 
-  let modLine = line.filter(Boolean);
-
-  for (let i = 1; i < modLine.length; i++) {
-    if (modLine[i] === modLine[i - 1]) {
-      modLine[i - 1] *= 2;
-      modLine[i] = 0;
+  for (let i = l; i >= 0; i--) {
+    if (line[i] === 0) {
+      result[z] = 0;
+      z++;
+      continue;
     }
+    if (mem === line[i]) {
+      // merge
+      result[l + 1] = line[i] << 1;
+      result[z] = 0;
+      z++;
+      mem = 0;
+      continue;
+    }
+    //shift
+    mem = result[l] = line[i];
+    l--;
   }
 
-  modLine = modLine.filter(Boolean);
-  return modLine
-    .concat(new Array(line.length - modLine.length).fill(0))
-    .reverse();
+  return result;
 };

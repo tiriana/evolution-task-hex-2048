@@ -39,6 +39,10 @@ describe("shift", () => {
       [2, 2, 4, 4],
       [0, 0, 4, 8],
     ],
+    [
+      [0, 0, 16, 2, 0, 2, 0, 0, 0, 4, 0, 0, 0, 0, 4, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 4, 8],
+    ],
   ])("returns [%s] for (%s, %s)", (beforeShift, afterShift) => {
     expect(shift(beforeShift)).toEqual(afterShift);
   });
