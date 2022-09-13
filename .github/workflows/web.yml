@@ -3,47 +3,40 @@ name: Web CI
 on: push
 
 jobs:
+
   unit:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Yarn
-        run: npm install -g yarn
+    - name: Checkout
+      uses: actions/checkout@v2
 
-      - name: Checkout
-        uses: actions/checkout@v2
+    - name: Install dependencies
+      run: npm install
 
-      - name: Cache
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: "npm"
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Run Jest tests with coverage
-        run: yarn test:coverage
+    - name: Run Jest tests
+      run: npm test -- --passWithNoTests
 
   e2e:
-    runs-on: ubuntu-20.04
-    container: lironavon/docker-puppeteer-container:14.16.0
+    runs-on: ubuntu-latest
     steps:
-      - name: Set up node using nvm
-        uses: dcodeIO/setup-node-nvm@v4
-        with:
-          node-version: lts/*
+    - name: Checkout
+      uses: actions/checkout@v2
 
-      - name: Checkout
-        uses: actions/checkout@v2
+    - name: Install dependencies
+      run: npm install
 
-      - name: Cache
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: "npm"
+    - name: Check Cypress tests exist
+      id: check_cypress_tests
+      uses: andstor/file-existence-action@v1
+      with:
+        files: "cypress/integration/"
 
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Run e2e tests
-        run: yarn test
+    - name: Install and run Cypress tests
+      uses: cypress-io/github-action@v2
+      if: steps.check_cypress_tests.outputs.files_exists == 'true'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        build: npm run build --if-present
+        start: npm start
+        wait-on: 'http://localhost:3000'
