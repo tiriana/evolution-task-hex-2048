@@ -30,7 +30,7 @@
     "serve": "^14.0.1",
     "surge": "^0.9.0",
     "tree-kill": "^1.2.2",
-    "ts-jest": "^29.0.1",
+    "ts-jest": "^23.10.5",
     "typescript": "^4.8.3"
   },
   "scripts": {
@@ -64,14 +64,11 @@
     ]
   },
   "devDependencies": {
-    "jest-mock-axios": "^4.7.0-beta",
+    "handlebars": "^4.5.3",
     "react-error-overlay": "6.0.11",
     "react-test-renderer": "^17.0.2"
   },
   "jest": {
-    "transform": {
-      "^.+\\.(ts|tsx|js|jsx)$": "ts-jest"
-    },
     "coverageReporters": [
       "clover",
       "json",

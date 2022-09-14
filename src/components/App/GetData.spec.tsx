@@ -1,3 +1,4 @@
+import React from "react";
 import { render } from "@testing-library/react"; // cleanup is automatic
 import { GetData } from "./GetData";
 import { RngServerRequest } from "./RngServerRequest";
