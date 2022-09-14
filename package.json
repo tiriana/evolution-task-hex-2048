@@ -6,15 +6,15 @@
     "@babel/runtime": "^7.19.0",
     "@infinium/react-keyboard-event-handler": "^1.5.8",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
+    "@testing-library/react": "^12.1.5",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.4.3",
     "@types/axios": "^0.14.0",
     "@types/jest": "^29.0.2",
     "@types/node": "^18.7.18",
     "@types/ramda": "^0.28.15",
-    "@types/react": "^18.0.20",
-    "@types/react-dom": "^18.0.6",
+    "@types/react": "^17.0.20",
+    "@types/react-dom": "^17.0.2",
     "axios": "^0.27.2",
     "classnames": "^2.3.2",
     "fp-ts": "^2.12.3",
@@ -22,13 +22,13 @@
     "node-sass": "^7.0.3",
     "puppeteer": "^17.1.3",
     "ramda": "^0.28.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-hexgrid": "^2.0.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^2.1.3",
     "sass": "^1.54.9",
     "serve": "^14.0.1",
-    "surge": "^0.23.1",
+    "surge": "^0.9.0",
     "tree-kill": "^1.2.2",
     "ts-jest": "^29.0.1",
     "typescript": "^4.8.3"
@@ -66,12 +66,18 @@
   "devDependencies": {
     "jest-mock-axios": "^4.7.0-beta",
     "react-error-overlay": "6.0.11",
-    "react-test-renderer": "^18.2.0"
+    "react-test-renderer": "^17.0.2"
   },
   "jest": {
     "transform": {
       "^.+\\.(ts|tsx|js|jsx)$": "ts-jest"
     },
-    "coverageReporters": ["clover", "json", "lcov", "text", "text-summary"]
+    "coverageReporters": [
+      "clover",
+      "json",
+      "lcov",
+      "text",
+      "text-summary"
+    ]
   }
 }
