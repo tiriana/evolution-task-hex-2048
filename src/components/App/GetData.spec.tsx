@@ -5,7 +5,7 @@ import { RngServerRequest } from "./RngServerRequest";
 import axios from "axios";
 jest.mock("axios");
 
-const tick = async () => new Promise((r) => setImmediate(r));
+const tick = async () => new Promise((r) => setTimeout(r, 0));
 
 it("Gets the data", async () => {
   const onReceived = jest.fn();
